@@ -13,7 +13,7 @@ def post_detail(request):
     return HttpResponse("Detail")
 
 def post_list(request):
-    return HttpResponse("List")
+    return render(request, "index.html", {})
 
 def post_update(request):
     return HttpResponse("Update")
