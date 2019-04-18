@@ -20,8 +20,8 @@ def post_create(request):
     }
     return render(request, "create_form.html", context_data)
 
-def post_detail(request, id=None):
-    queryset = get_object_or_404(Post, id=id)
+def post_detail(request, slug=None):
+    queryset = get_object_or_404(Post, slug=slug)
     context_data = {
         "queryset": queryset,
         "title": "Detail post"
