@@ -4,9 +4,15 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
 
+from django.utils import timezone
 from django.utils.text import slugify
 # Create your models here.
  #MVC MODEL VIEW CONTROLLER
+
+class PostManager(models.Manager):
+    def active(self, *args, **kwargs):
+        # Post.objects.all() * super(PostManager, self).all()
+        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 def upload_location(instance, filename):
      return "%s/%s" %(instance.id, filename)
@@ -27,6 +33,8 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    objects = PostManager()
 
 
     def __unicode__(self):

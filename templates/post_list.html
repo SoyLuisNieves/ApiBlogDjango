@@ -11,6 +11,8 @@
           <img src="{{ obj.image.url }}" alt="">
         {% endif %}
           <div class="caption">
+          {% if obj.draft %}<h3>Staff Only: Draft</h3>{% endif %}
+          {% if obj.publish > today %} <h3>Future post</h3> {% endif %}
             <h3>
               <a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><small> {{ obj.publish | timesince }} ago</small>
             </h3>
