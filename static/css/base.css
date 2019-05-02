@@ -24,9 +24,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-
-h1{
-    color: red;
+.wmd-panel{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 .icon-google2,
