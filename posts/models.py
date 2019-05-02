@@ -4,8 +4,11 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
 
+from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.utils.text import slugify
+
+from markdown_deux import markdown
 # Create your models here.
  #MVC MODEL VIEW CONTROLLER
 
@@ -46,6 +49,11 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"slug": self.slug})
         # return "/posts/%s/" %(self.id)
+    
+    def get_markdown(self):
+        content = self.content
+        markdown_text = markdown(content)
+        return mark_safe(markdown_text)
         
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
