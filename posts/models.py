@@ -8,7 +8,9 @@ from django.utils.safestring import mark_safe
 from django.utils import timezone
 from django.utils.text import slugify
 
+
 from markdown_deux import markdown
+from comments.models import Comment
 # Create your models here.
  #MVC MODEL VIEW CONTROLLER
 
@@ -56,6 +58,12 @@ class Post(models.Model):
         content = self.content
         markdown_text = markdown(content)
         return mark_safe(markdown_text)
+    
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
         
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
