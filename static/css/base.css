@@ -81,3 +81,11 @@
     content: "\ead6";
   }
   
+  .comment-reply{
+    display: none;
+  }
+
+  .comment-reply-btn:hover,
+  .comment-reply-btn{
+    text-decoration: none;
+  }
