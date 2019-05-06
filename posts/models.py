@@ -18,7 +18,9 @@ class PostManager(models.Manager):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 def upload_location(instance, filename):
-     return "%s/%s" %(instance.id, filename)
+    PostModel = instance.__class__
+    new_id = PostModel.objects.order_by("id").last().id + 1
+    return "%s/%s" %(new_id, filename)
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
