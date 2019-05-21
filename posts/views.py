@@ -1,6 +1,7 @@
 from urllib.parse import quote_plus
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -14,6 +15,7 @@ from .forms import PostForm
 from .models import Post
 from .utils import get_read_time
 
+@login_required
 def post_create(request):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
@@ -43,7 +45,7 @@ def post_detail(request, slug=None):
         "object_id": instance.id,
     }
     form = CommentForm(request.POST or None, initial=initial_data)
-    if form.is_valid():
+    if form.is_valid() and request.user.is_authenticated():
         c_type               = form.cleaned_data.get("content_type")
         content_type         = ContentType.objects.get(model=c_type)
         obj_id               = form.cleaned_data.get('object_id')
