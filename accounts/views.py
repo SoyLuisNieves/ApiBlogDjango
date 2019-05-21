@@ -53,4 +53,4 @@ def register_view(request):
     
 def logout_view(request):
     logout(request)
-    return render(request, "form.html", {})
+    return redirect("/")
