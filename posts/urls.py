@@ -1,5 +1,5 @@
-from django.conf.urls import url
 from django.contrib import admin
+from django.urls import re_path
 
 from .views import (
     post_list,
@@ -8,11 +8,11 @@ from .views import (
     post_update,
     post_delete,
 )
-
+app_name='posts'
 urlpatterns = [
-    url(r'^$', post_list, name='list'),
-    url(r'^create/$', post_create),
-    url(r'^(?P<slug>[-\w]+)/$', post_detail, name='detail'),
-    url(r'^(?P<slug>[-\w]+)/edit/$', post_update, name='update'),
-    url(r'^(?P<id>\d+)/delete/$', post_delete),
+    re_path(r'^$', post_list, name='list'),
+    re_path(r'^create/$', post_create),
+    re_path(r'^(?P<slug>[-\w]+)/$', post_detail, name='detail'),
+    re_path(r'^(?P<slug>[-\w]+)/edit/$', post_update, name='update'),
+    re_path(r'^(?P<id>\d+)/delete/$', post_delete),
 ]

@@ -9,7 +9,7 @@ from django.contrib.auth import (
 from .forms import UserLoginForm, UserRegisterForm
 
 def login_view(request):
-    print(request.user.is_authenticated())
+    print(request.user.is_authenticated)
     next = request.GET.get('next')
     title = "Login"
     form = UserLoginForm(request.POST or None)
@@ -28,7 +28,7 @@ def login_view(request):
     return render(request, "form.html", context)
 
 def register_view(request):
-    print(request.user.is_authenticated())
+    print(request.user.is_authenticated)
     next = request.GET.get('next')
     title = "Register"
     form = UserRegisterForm(request.POST or None)
